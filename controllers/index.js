@@ -11,14 +11,15 @@ module.exports = function (app) {
 			box = `${coord.ilat},${coord.ilon},${coord.flat},${coord.flon}`
 
 			query = `
-				node(${box});out;
+				node(${box})[amenity];out;
 			 `.replace(/\s/g, '')
-
-//			  	way(${box})["amenity"="restaurant"];out;
-//			  	relation(${box})["amenity"="restaurant"];out;
 
 			overpass(query, (err, data) => {			
 				data = data.features
+
+				let amenities = unique = [...new Set(data.map(value => value.properties.tags.amenity))];
+
+				console.log(amenities.length);
 
 				data = data.map(value => Object.assign({}, {
 					id: value.properties.id
@@ -26,9 +27,9 @@ module.exports = function (app) {
 				,	name: value.properties.tags.name
 				,	lat: value.geometry.coordinates[1]
 				, 	lon: value.geometry.coordinates[0]
-				})).filter(value => 
-					(value.hasOwnProperty('name') !== 'undefined') && 
-					(value.hasOwnProperty('lat') !== 'undefined') && 
+				})).filter(value =>
+					(value.hasOwnProperty('name') !== 'undefined') &&
+					(value.hasOwnProperty('lat') !== 'undefined') &&
 					(value.hasOwnProperty('lon') !== 'undefined')
 				);
 
