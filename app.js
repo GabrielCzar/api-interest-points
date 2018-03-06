@@ -8,6 +8,7 @@ let app = express()
 // configuration
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
+app.set('views', __dirname + '/views');
 
 load('controllers').then('routes').into(app);
 

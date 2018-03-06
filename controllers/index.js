@@ -3,7 +3,7 @@ module.exports = function (app) {
 
 	return {
 		index: function (req, res) {
-			res.json('Api')
+			res.render('index')
 		},
 		city: function (req, res) {
 			coord = req.params
