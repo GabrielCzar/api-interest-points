@@ -12,6 +12,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-load": "^1.1.16",
-    "query-overpass": "^1.5.3"
+    "query-overpass": "^1.5.3",
+    "semantic-ui": "^2.3.0"
   }
 }
