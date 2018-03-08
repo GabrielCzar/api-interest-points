@@ -1,0 +1,27 @@
+/* STYLESHEET */
+
+.masthead.segment {
+  min-height: 100%;
+  padding: 1em 0em;
+}
+
+.masthead h1.ui.header {
+  margin-top: 1.8em;
+  margin-bottom: 0em;
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
+.pt {
+  padding-top: 7px
+}
+
+.lw {
+  width: 60%;
+  margin: 0 auto;
+}
