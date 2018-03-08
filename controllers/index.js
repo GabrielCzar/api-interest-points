@@ -1,8 +1,13 @@
 module.exports = function (app) {
-	
+	let cheerio = require('cheerio')
+	,   request = require('request');
+
 	return {
 		index: function (req, res) {
-			res.render('index')
+			res.render('pt-index')
+		},
+		us_index: function (req, res) {
+			res.render('us-index')
 		},
 		city: function (req, res) {
 			let overpass = require('query-overpass')
@@ -16,39 +21,35 @@ module.exports = function (app) {
 			 `.replace(/\s/g, '')
 
 			overpass(query, (err, data) => {			
-				data = data.features
+				if (data.hasOwnProperty('features')) {
+					data = data.features
 
-				let amenities = unique = [...new Set(data.map(value => value.properties.tags.amenity))];
+					let amenities = unique = [...new Set(data.map(value => value.properties.tags.amenity))];
 
-				console.log(amenities.length);
+					console.log('amenities >> ' + amenities.length);
 
-				data = data.map(value => Object.assign({}, {
-					id: value.properties.id
-				,	amenity: value.properties.tags.amenity
-				,	name: value.properties.tags.name 
-				,	lat: value.geometry.coordinates[1]
-				, 	lon: value.geometry.coordinates[0]
-				})).filter(value =>
-					(value.hasOwnProperty('name') === 'undefined') &&
-					(value.hasOwnProperty('lat') !== 'undefined') &&
-					(value.hasOwnProperty('lon') !== 'undefined')
-				);
+					data = data.map(value => Object.assign({}, {
+						id: value.properties.id
+					,	amenity: value.properties.tags.amenity
+					,	name: value.properties.tags.name || ''
+					,	lat: value.geometry.coordinates[1]
+					, 	lon: value.geometry.coordinates[0]
+					})).filter(value =>	value['name'] !== '');
 
-				console.log(data.length)
+					console.log('interest points >> ' + data.length)
 
-				res.json(data);
+					res.json(data);
+				} else 
+					res.json([]);
 			});
 
 		},
-		scrape: function (req, res) {
-			let cheerio = require('cheerio')
-			,   request = require('request');
+		scrape_cities: function (req, res) {
+			let OSM_URL = 'http://download.bbbike.org/osm/bbbike/'
 
-			let osm_url = 'http://download.bbbike.org/osm/bbbike/'
-
-			request(osm_url, function (err, rs, html) {
+			request(OSM_URL, function (err, rs, html) {
 				if (!err) {
-					var $ = cheerio.load(html);
+					let $ = cheerio.load(html);
 
 					let list = $('tbody').first().children()
 
@@ -60,9 +61,30 @@ module.exports = function (app) {
 					})
 					
 					console.log('cities: ' + data.length)
+					
 					res.json(data)
 				}
 			})
+		},
+		scrape_location: function (req, res) {
+			let params = req.params;
+			let city = params.city
+
+			let LOCATION_URL = `http://download.bbbike.org/osm/bbbike/${city}/${city}.poly`
+
+			request(LOCATION_URL, function (err, rs, html) {
+				if (!err) {
+					let $ = cheerio.load(html);
+
+					let data = $('body').first().text();
+					data = data.split('\n').splice(2, 4);
+					firstPoint = data[0].slice(3).split(' ').reverse().join().split(',,')
+					lastPoint = data[2].slice(3).split(' ').reverse().join().split(',,')
+					result = firstPoint.concat(lastPoint)
+
+					res.json(result)
+				}
+			});
 		}
 	}
 }
