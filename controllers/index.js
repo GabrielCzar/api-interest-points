@@ -25,11 +25,11 @@ module.exports = function (app) {
 				data = data.map(value => Object.assign({}, {
 					id: value.properties.id
 				,	amenity: value.properties.tags.amenity
-				,	name: value.properties.tags.name
+				,	name: value.properties.tags.name 
 				,	lat: value.geometry.coordinates[1]
 				, 	lon: value.geometry.coordinates[0]
 				})).filter(value =>
-					(value.hasOwnProperty('name') !== 'undefined') &&
+					(value.hasOwnProperty('name') === 'undefined') &&
 					(value.hasOwnProperty('lat') !== 'undefined') &&
 					(value.hasOwnProperty('lon') !== 'undefined')
 				);

@@ -36,23 +36,32 @@
         <h1 class="ui huge header">
             Scraper For Overpass
         </h1>
+        
         <h2>
             Procure pelos pontos de interesse
         </h2>
-        <form class="ui form row">
-            <div class="field column">
-                <label>Selecione uma Cidade</label>
-                <select class="ui search dropdown" id="cities">
-                  <option value="">Selecione uma Cidade</option>
-                  <option :key="city" v-bind:value="city" v-for="city in cities">{{ city }}</option>
-                </select>
-            </div>
-            <div class="field column">
-                <button class="fluid ui inverted green button" type="submit">
-                    Pesquisar
-                </button>
-            </div>
-        </form>
+        
+        <div>
+          <form class="ui form row">
+              <div class="field column">
+                  <label>Selecione uma Cidade</label>
+              
+                  <select class="ui search dropdown" id="cities">
+                    <option value="">Selecione uma Cidade</option>
+                    <option :key="city" v-bind:value="city" v-for="city in cities">
+                      {{ city }}
+                    </option>
+                  </select>
+                  
+              </div>
+              
+              <div class="field column">
+                  <button class="fluid ui inverted green button" type="submit">
+                      Pesquisar
+                  </button>
+              </div>
+          </form>
+        </div>
     </div>
 </div>
 
@@ -67,7 +76,9 @@
   var cities = new Vue({
     el: '#cities',
     data: {
-      cities: []
+      cities: [],
+      city: '',
+      message: ''
     }, 
     mounted() {
       this.get()
@@ -79,6 +90,10 @@
             this.cities = data
           });
         });
+      },
+      sub: function(event){
+          this.message = "ERROR.";
+          event.preventDefault();   
       }
     }
   });
