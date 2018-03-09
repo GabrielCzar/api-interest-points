@@ -29,11 +29,11 @@
             Scraper For Overpass
         </h1>
         
-        <h2>
+        <h2 class="ui header pb">
             Procure pelos pontos de interesse
         </h2>        
 
-        <form class="ui form row lw">
+        <form class="ui form row lw pt-2">
             <div class="field column">
                 <label>Selecione uma Cidade</label>
             
@@ -42,14 +42,11 @@
                   <option :key="city" v-bind:value="city" v-for="city in cities">
                     {{ city }}
                   </option>
-
-
                 </select>
-                
             </div>
             
             <div class="field column" id="search">
-                <button class="fluid ui inverted green button" v-on:click="submit">
+                <button class="fluid ui green button" v-on:click="submit" id="btnSearch">
                     Pesquisar 
                 </button>
             </div>
@@ -58,14 +55,20 @@
 
         <!-- access interest points(ip) from city -->
         <div class="ui floating teal message" id="message" :hidden="hidden">
-          <div class="ui ">
+          <div class="ui">
             <div class="column">
-              <div class="container pt" data-tooltip="Através desse link terá acesso a todos os pontos de interesse" data-inverted="">
+              <div class="container pt">
+                  <div class="ui pointing below blue basic label">
+                    Através desse link terá acesso a todos os pontos de interesse de {{ city }}
+                  </div>
+
                   <a :href="url" target="_blank" id="url">
                     {{ url }}
                   </a>
               </div>
             </div>
+
+            <div class="ui divider"></div>
             
             <div class="column">
               <div class="ui buttons">

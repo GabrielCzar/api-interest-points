@@ -79,6 +79,10 @@ let search = new Vue({
           message.hidden = false;
           })
         });
+
+      let btnSearch = $('#btnSearch');
+      btnSearch.addClass('inverted')
+
       e.preventDefault();
     }
   }

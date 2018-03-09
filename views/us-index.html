@@ -54,8 +54,8 @@
 
         <!-- access interest points(ip) from city -->
         <div class="ui floating teal message" id="message" :hidden="hidden">
-          <div class="ui grid">
-            <div class="eleven wide column">
+          <div class="ui">
+            <div class="column">
               <div class="container pt" data-tooltip="Através desse link terá acesso a todos os pontos de interesse" data-inverted="">
                   <a :href="url" target="_blank" id="url">
                     {{ url }}
@@ -63,14 +63,14 @@
               </div>
             </div>
             
-            <div class="five column">
+            <div class="column">
               <div class="ui buttons">
                 <button class="ui button" v-on:click="copy" 
-                  data-inverted="" id="btnCopy">Copy</button>
+                  data-inverted="" id="btnCopy">Copiar</button>
                 
-                <div class="or"></div>
+                 <div class="or" data-text="ou"></div>
 
-                <a class="ui positive button" :href="url">See data</a>
+                <a class="ui positive button" :href="url">Ver dados</a>
               </div>
             </div>
           </div>
