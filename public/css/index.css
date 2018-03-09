@@ -29,3 +29,8 @@
   width: 60%;
   margin: 0 auto;
 }
+
+.wrapper-text {
+  word-wrap: break-word;
+  flex: inherit;
+}

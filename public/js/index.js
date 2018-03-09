@@ -81,7 +81,8 @@ let search = new Vue({
         });
 
       let btnSearch = $('#btnSearch');
-      btnSearch.addClass('inverted')
+      btnSearch.addClass('inverted'); // lost color
+      btnSearch.blur(); // lost focus
 
       e.preventDefault();
     }

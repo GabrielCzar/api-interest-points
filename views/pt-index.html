@@ -24,65 +24,63 @@
 
 <div class="ui vertical masthead center aligned segment">
 
-    <div class="ui text container">
-        <h1 class="ui huge header">
-            Scraper For Overpass
-        </h1>
-        
-        <h2 class="ui header pb">
-            Procure pelos pontos de interesse
-        </h2>        
+  <div class="ui text container">
+      <h1 class="ui huge header">
+          Scraper For Overpass
+      </h1>
+      
+      <h2 class="ui header pb">
+          Procure pelos pontos de interesse
+      </h2>        
 
-        <form class="ui form row lw pt-2">
-            <div class="field column">
-                <label>Selecione uma Cidade</label>
-            
-                <select class="ui search dropdown" id="cities">
-                  <option value="">Selecione uma Cidade</option>
-                  <option :key="city" v-bind:value="city" v-for="city in cities">
-                    {{ city }}
-                  </option>
-                </select>
-            </div>
-            
-            <div class="field column" id="search">
-                <button class="fluid ui green button" v-on:click="submit" id="btnSearch">
-                    Pesquisar 
-                </button>
-            </div>
-
-        </form>
-
-        <!-- access interest points(ip) from city -->
-        <div class="ui floating teal message" id="message" :hidden="hidden">
-          <div class="ui">
-            <div class="column">
-              <div class="container pt">
-                  <div class="ui pointing below blue basic label">
-                    Através desse link terá acesso a todos os pontos de interesse de {{ city }}
-                  </div>
-
-                  <a :href="url" target="_blank" id="url">
-                    {{ url }}
-                  </a>
-              </div>
-            </div>
-
-            <div class="ui divider"></div>
-            
-            <div class="column">
-              <div class="ui buttons">
-                <button class="ui button" v-on:click="copy" 
-                  data-inverted="" id="btnCopy">Copiar</button>
-                
-                 <div class="or" data-text="ou"></div>
-
-                <a class="ui positive button" :href="url">Ver dados</a>
-              </div>
-            </div>
+      <form class="ui form row lw pt-2">
+          <div class="field column">
+              <label>Selecione uma Cidade</label>
+          
+              <select class="ui search dropdown" id="cities">
+                <option value="">Selecione uma Cidade</option>
+                <option :key="city" v-bind:value="city" v-for="city in cities">
+                  {{ city }}
+                </option>
+              </select>
+          </div>
+          
+          <div class="field column" id="search">
+              <button class="fluid ui green button" v-on:click="submit" id="btnSearch">
+                  Pesquisar 
+              </button>
+          </div>
+      </form>
+      
+      <!-- access interest points(ip) from city -->
+      <div class="ui floating teal message" id="message" :hidden="hidden">
+        <div class="column">
+          <!-- Testar -->
+          <div class="ui pointing below blue basic label column">
+            Através desse link terá acesso a todos os pontos de interesse de {{ city }}
+          </div>
+          <div class="container pt column">
+              <a :href="url" target="_blank" id="url">
+                <p class="wrapper-text">
+                  {{ url }}
+                </p>
+              </a>  
           </div>
         </div>
-        <!-- end access ip city -->
+
+        <div class="ui divider"></div>
+            
+        <div class="column">
+          <div class="ui buttons">
+            <button class="ui button" v-on:click="copy" id="btnCopy">Copiar</button>  
+     
+            <div class="or" data-text="ou"></div>
+    
+            <a class="ui positive button" :href="url">Ver dados</a>
+          </div>
+        </div>
+      </div>
+      <!-- end access ip city -->
     </div>
 </div>
 
