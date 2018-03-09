@@ -34,6 +34,7 @@ module.exports = function (app) {
 					,	name: value.properties.tags.name || ''
 					,	lat: value.geometry.coordinates[1]
 					, 	lon: value.geometry.coordinates[0]
+					,   geometry: value.geometry
 					})).filter(value =>	value['name'] !== '');
 
 					console.log('interest points >> ' + data.length)
