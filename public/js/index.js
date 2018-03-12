@@ -11,7 +11,7 @@ var cities = new Vue({
   },
   methods: {
     get: function () {
-      fetch('/scrape-cities').then((res) => {
+      fetch('/api/cities').then((res) => {
         res.json().then((data) => {
           this.cities = data
         });
@@ -62,23 +62,13 @@ let search = new Vue({
 
       if (cityChoosed === '' || cityChoosed === 'undefined') 
       	return false;
-      // get coordinates
-      fetch(`/scrape-location/${cityChoosed}`).then((res) => {
-        res.json().then((coords) => {
-          let ilat = coords[0], 
-              ilon = coords[1], 
-              flat = coords[2], 
-              flon = coords[3];
-          // create url to find data
+      
+      let origin = document.origin;
+      const URL = `${origin}/api/interest-points/city/${cityChoosed}/${cityChoosed}-interest-points.json`;
 
-          let origin = document.location.origin;
-          const URL = `${origin}/ilat/${ilat}/ilon/${ilon}/flat/${flat}/flon/${flon}/city/${cityChoosed}-interest-points.json`;
-          // set data
-          message.city = cityChoosed;
-          message.url = URL;
-          message.hidden = false;
-          })
-        });
+      message.city = cityChoosed;
+      message.url = URL;
+      message.hidden = false;
 
       let btnSearch = $('#btnSearch');
       btnSearch.addClass('inverted'); // lost color
