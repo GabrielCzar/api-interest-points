@@ -140,8 +140,11 @@ module.exports = function (app) {
 		api_error: function (req, res) {
 			res.status(400).send({ error: 'Bad Request'})
 		},
-		error: function (req, res) {
-			res.status(400).send({ error: 'Page not found'})
+		pt_error: function (req, res) {
+			res.render('pt-error')
+		},
+		us_error: (req, res) => {
+			res.render('us-error')
 		}
 	}
 }

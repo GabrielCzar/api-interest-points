@@ -14,5 +14,6 @@ module.exports = function (app) {
 
 	// Error page
 	app.get('/api*', home.api_error);
-	app.get('*', home.error);
+	app.get('/us*', home.us_error);
+	app.get('*', home.pt_error);
 }
