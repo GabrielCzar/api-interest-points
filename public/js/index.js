@@ -11,7 +11,7 @@ var cities = new Vue({
   },
   methods: {
     get: function () {
-      fetch('/scrape-cities').then((res) => {
+      fetch('/api/cities').then((res) => {
         res.json().then((data) => {
           this.cities = data
         });
@@ -28,18 +28,28 @@ var message = new Vue({
     city: 'Beijing'
   },
   methods: {
-    copy: function () {
+    copy: function (e) {
       let link = document.getElementById('url');
-      let range = document.createRange();
-      range.selectNode(link);
-      window.getSelection().addRange(range);
-      document.execCommand('Copy');
+      let area = document.createElement('textarea');
+
+      area.setAttribute('type', 'hidden');
+      area.textContent = link.text.replace(/\s/g, '');
+
+      document.body.appendChild(area);
+      area.select();
+
+      document.execCommand("Copy");
+      
+      document.body.removeChild(area);
+
       // Show feedback to user
       let btnCopy = document.getElementById('btnCopy');
       btnCopy.setAttribute('data-tooltip', 'URL Copiada com sucesso!');
       setTimeout(() => {
         btnCopy.removeAttribute('data-tooltip');
       }, 1000);
+
+      e.preventDefault();
     }
    }
  });
@@ -52,21 +62,18 @@ let search = new Vue({
 
       if (cityChoosed === '' || cityChoosed === 'undefined') 
       	return false;
-      // get coordinates
-      fetch(`/scrape-location/${cityChoosed}`).then((res) => {
-        res.json().then((coords) => {
-          let ilat = coords[0], 
-              ilon = coords[1], 
-              flat = coords[2], 
-              flon = coords[3];
-          // create url to find data
-          const URL = `/ilat/${ilat}/ilon/${ilon}/flat/${flat}/flon/${flon}/city/${cityChoosed}-interest-points.json`;
-          // set data
-          message.city = cityChoosed;
-          message.url = URL;
-          message.hidden = false;
-          })
-        });
+      
+      let origin = document.origin;
+      const URL = `${origin}/api/interest-points/city/${cityChoosed}/${cityChoosed}-interest-points.json`;
+
+      message.city = cityChoosed;
+      message.url = URL;
+      message.hidden = false;
+
+      let btnSearch = $('#btnSearch');
+      btnSearch.addClass('inverted'); // lost color
+      btnSearch.blur(); // lost focus
+
       e.preventDefault();
     }
   }

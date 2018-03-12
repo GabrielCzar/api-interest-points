@@ -1,7 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="us">
 <head>
     <meta charset="utf-8" />
+
+    <meta property="og:title" content="Interest Points" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="interest-points.herokuapp.com" />
+    <meta property="og:site_name" content="Interest Points" />
+    <meta property="og:description" content="search by interest points by city" />
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
@@ -52,30 +59,35 @@
 
         </form>
 
-        <!-- access interest points(ip) from city -->
-        <div class="ui floating teal message" id="message" :hidden="hidden">
-          <div class="ui grid">
-            <div class="eleven wide column">
-              <div class="container pt" data-tooltip="Através desse link terá acesso a todos os pontos de interesse" data-inverted="">
-                  <a :href="url" target="_blank" id="url">
-                    {{ url }}
-                  </a>
-              </div>
-            </div>
-            
-            <div class="five column">
-              <div class="ui buttons">
-                <button class="ui button" v-on:click="copy" 
-                  data-inverted="" id="btnCopy">Copy</button>
-                
-                <div class="or"></div>
-
-                <a class="ui positive button" :href="url">See data</a>
-              </div>
-            </div>
+      <!-- access interest points(ip) from city -->
+      <div class="ui floating teal message" id="message" :hidden="hidden">
+        <div class="column">
+          <!-- Testar -->
+          <div class="ui pointing below blue basic label column">
+            Through this link you have access to all points of interest in {{ city }}
+          </div>
+          <div class="container pt column">
+              <a :href="url" target="_blank" id="url">
+                <p class="wrapper-text">
+                  {{ url }}
+                </p>
+              </a>  
           </div>
         </div>
-        <!-- end access ip city -->
+
+        <div class="ui divider"></div>
+            
+        <div class="column">
+          <div class="ui buttons">
+            <button class="ui button" v-on:click="copy" id="btnCopy">Copy</button>  
+     
+            <div class="or"></div>
+    
+            <a class="ui positive button" :href="url">See data</a>
+          </div>
+        </div>
+      </div>
+      <!-- end access ip city -->
     </div>
 </div>
 
