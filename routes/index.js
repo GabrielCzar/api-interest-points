@@ -8,6 +8,7 @@ module.exports = function (app) {
 	// routes api
 	app.get('/api/cities', home.scrape_cities)
 	app.get('/api/interest-points/city/:city*', home.interest_points)
+	app.get('/api/localization/city/:city', home.localization)
 
 	// Deprecated
 	app.get('/ilat/:ilat/ilon/:ilon/flat/:flat/flon/:flon/', home.city) 
