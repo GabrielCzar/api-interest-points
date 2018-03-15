@@ -1,4 +1,7 @@
 /* STYLESHEET */
+* {
+   scroll-behavior: smooth;
+}
 
 .masthead.segment {
   min-height: 100%;
@@ -34,3 +37,7 @@
   word-wrap: break-word;
   flex: inherit;
 }
+
+.btn-down {
+  margin-top: 50px;
+}  
