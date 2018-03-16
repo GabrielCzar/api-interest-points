@@ -137,6 +137,40 @@ module.exports = function (app) {
 				}
 			});
 		},
+		localization: function (req, res) {
+			let params = req.params;
+			let city = params.city;
+
+			let LOCATION_URL = `http://download.bbbike.org/osm/bbbike/${city}/${city}.poly`
+
+			request(LOCATION_URL, function (err, rs, html) {
+				if (!err) {
+					let $ = cheerio.load(html);
+
+					let data = $('body').first().text();
+					data = data.split('\n').splice(2, 4);
+					firstPoint = data[0].slice(3).split(' ').reverse().join().split(',,')
+					lastPoint = data[2].slice(3).split(' ').reverse().join().split(',,')
+					result = firstPoint.concat(lastPoint)
+					
+					let [ ilat, ilon, flat, flon ] = result;
+
+					res.json({
+						initial: {
+							latitude: ilat,
+							longitude: ilon
+						},
+						final: {
+							latitude: flat,
+							longitude: flon
+						}
+					});
+				};
+			});	
+		},
+		amenities: function (req, res) {
+
+		},
 		api_error: function (req, res) {
 			res.status(400).send({ error: 'Bad Request'})
 		},
