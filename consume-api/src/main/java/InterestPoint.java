@@ -1,9 +1,6 @@
-import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
 
 import java.math.BigInteger;
-import java.util.List;
 
 public class InterestPoint {
     private BigInteger id;
@@ -11,7 +8,7 @@ public class InterestPoint {
     private String amenity;
     private Double lat;
     private Double lon;
-    private Geom geometry;
+    private GeometryJSON geometry;
 
     public InterestPoint() { }
 
@@ -23,7 +20,7 @@ public class InterestPoint {
         this.lon = lon;
     }
 
-    public InterestPoint(BigInteger id, String name, String amenity, Double lat, Double lon, Geom geometry) {
+    public InterestPoint(BigInteger id, String name, String amenity, Double lat, Double lon, GeometryJSON geometry) {
         this.id = id;
         this.name = name;
         this.amenity = amenity;

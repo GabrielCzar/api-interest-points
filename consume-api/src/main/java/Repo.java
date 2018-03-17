@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Repo {
 
-    public static void save (List<InterestPoint> points) throws PropertyVetoException, SQLException, IOException {
+    public static void save (List<InterestPoint> points) {
         Connection connection = null;
         PreparedStatement stmt = null;
 

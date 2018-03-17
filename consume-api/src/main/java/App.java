@@ -15,7 +15,6 @@ public class App {
     public static void main(String[] args) throws IOException {
         mapper = new ObjectMapper();
 
-
         List<InterestPoint> ips =
                 mapper.readValue(
                         new URL(URL),
@@ -26,12 +25,7 @@ public class App {
 
         System.out.println(tam);
 
-        try {
-            Repo.save(ips);
-        } catch (PropertyVetoException | SQLException e) {
-            e.printStackTrace();
-        }
-
+        //Repo.save(ips);
 
         System.out.println("FINISH");
 

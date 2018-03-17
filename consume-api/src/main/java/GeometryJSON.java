@@ -4,14 +4,14 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 
 import java.util.List;
 
-public class Geom {
+public class GeometryJSON {
     private GeometryFactory gf = new GeometryFactory();
     private String type;
     private List<Double> coordinates;
 
-    public Geom () {}
+    public GeometryJSON() {}
 
-    public Geom(String type, List<Double> coordinates) {
+    public GeometryJSON(String type, List<Double> coordinates) {
         this.type = type;
         this.coordinates = coordinates;
     }
