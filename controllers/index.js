@@ -146,12 +146,12 @@ module.exports = function (app) {
 			if (city.includes('Quixada')) {
 				res.json({
 					initial: {
-						latitude: -4.87714, 
-						longitude: -39.17844
+						latitude: "-4.87714", 
+						longitude: "-39.17844"
 					},
 					final: {
-						latitude: -5.08715, 
-						longitude: -38.8928
+						latitude: "-5.08715", 
+						longitude: "-38.8928"
 					}
 				});
 				return;
