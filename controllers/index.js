@@ -138,10 +138,24 @@ module.exports = function (app) {
 			});
 		},
 		localization: function (req, res) {
-			let params = req.params;
-			let city = params.city;
+			const params = req.params;
+			const city = params.city;
 
-			let LOCATION_URL = `http://download.bbbike.org/osm/bbbike/${city}/${city}.poly`
+			const LOCATION_URL = `http://download.bbbike.org/osm/bbbike/${city}/${city}.poly`
+
+			if (city.includes('Quixada')) {
+				res.json({
+					initial: {
+						latitude: -4.87714, 
+						longitude: -39.17844
+					},
+					final: {
+						latitude: -5.08715, 
+						longitude: -38.8928
+					}
+				});
+				return;
+			}
 
 			request(LOCATION_URL, function (err, rs, html) {
 				if (!err) {
