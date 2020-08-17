@@ -17,6 +17,6 @@
     "express-load": "^1.1.16",
     "query-overpass": "^1.5.3",
     "request": "^2.83.0",
-    "semantic-ui": "^2.3.0"
+    "semantic-ui": "^2.4.2"
   }
 }
