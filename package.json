@@ -5,18 +5,22 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cheerio": "^1.0.0-rc.2",
-    "ejs": "^2.5.7",
+    "ejs": "^3.1.7",
     "express": "^4.16.2",
     "express-load": "^1.1.16",
     "query-overpass": "^1.5.3",
-    "request": "^2.83.0",
-    "semantic-ui": "^2.3.0"
-  }
+    "request": "^2.88.0",
+    "semantic-ui": "^2.4.1",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
